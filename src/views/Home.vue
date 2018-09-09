@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container-fluid">
+    <client-table :columns="columns" :options="options" :data="data" :loading="loading">
+    </client-table>
   </div>
 </template>
 
+<style lang="less">
+</style>
+
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import axios from 'axios';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+  },
+  data() {
+    return {
+      columns: ['name', 'capital', 'population'],
+      data: [],
+      loading: false,
+      options: {
+        uniqueKey: 'alpha2Code',
+      },
+    };
+  },
+  async created() {
+    this.loading = true;
+    const { data } = await axios.get('/data.json');
+    this.data = data;
+    this.loading = false;
   },
 };
 </script>
