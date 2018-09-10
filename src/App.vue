@@ -25,8 +25,5 @@
     }
   }
 }
-.recordsInfo {
-  float: right;
-}
 </style>
 
